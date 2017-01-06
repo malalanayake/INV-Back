@@ -2,6 +2,7 @@ package com.sthn.messaging;
 
 
 import com.sthn.config.RouteConfig;
+import com.sthn.config.SpringSecurityWebAppConfig;
 import com.sthn.messaging.impl.CommonRouteInitServiceImpl;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
@@ -34,6 +35,9 @@ public class CommonRouteInitServiceImplTest {
     @EndpointInject(uri = MOCK_DIRECT_PUBLISH)
     MockEndpoint mockPublishRoute;
 
+    public CommonRouteInitServiceImplTest(){
+        SpringSecurityWebAppConfig.initializationStormpath();
+    }
 
     @PostConstruct
     public void init() throws Exception {

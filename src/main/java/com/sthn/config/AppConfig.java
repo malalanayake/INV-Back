@@ -46,20 +46,6 @@ public class AppConfig {
 
 
     @Bean
-    public PropertySourcesPlaceholderConfigurer propertyPlaceholderConfigurer() {
-        log.info("[START:Load Application Properties]");
-
-        String propertiesFilename = "/application-" + APP_ENV + ".properties";
-
-        PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
-        configurer.setLocation(new ClassPathResource(propertiesFilename));
-        log.info("[ACTIVATE:Profile " + APP_ENV + "]");
-        log.info("[END:Load Application Properties]");
-
-        return configurer;
-    }
-
-    @Bean
     public DataSource dataSource() {
         log.info("[START:Set DataSource]");
         BasicDataSource basicDataSource = new BasicDataSource();

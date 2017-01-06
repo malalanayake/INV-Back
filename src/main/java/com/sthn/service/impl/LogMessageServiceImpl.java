@@ -20,6 +20,7 @@ public class LogMessageServiceImpl implements ILogMessageService {
     @Override
     public boolean status(Object data) {
         iRouteInitService.enter(RouteConfig.DIRECT_STATUS, data);
+        System.out.print("Test works");
         return false;
     }
 }
