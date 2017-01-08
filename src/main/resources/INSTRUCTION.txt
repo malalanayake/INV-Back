@@ -1,0 +1,17 @@
+DEV Environment setup
+    - Add following environment variables to operation system.
+        - DATASOURCE_URL : jdbc:hsqldb:file:C:/Git-Repo/INV-Back/satahan
+        - DATABASE_USERNAME : sa
+        - DATABASE_PASSWORD :
+
+    - Add following environment variables to override the system environment variables to run on IDE
+        - DATASOURCE_URL : dbc:mysql://localhost:3306/test
+        - DATABASE_USERNAME : root
+        - DATABASE_PASSWORD : root123
+
+
+PROD Environment setup
+    - Add following environment variables to production system.
+        - DATASOURCE_URL : dbc:mysql://${HOST_NAME}:3306/${DATABASE_NAME}
+        - DATABASE_USERNAME : ${DATABASE_USERNAME}
+        - DATABASE_PASSWORD : ${DATABASE_PASSWORD}

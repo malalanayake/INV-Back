@@ -9,9 +9,9 @@ import static com.stormpath.spring.config.StormpathWebSecurityConfigurer.stormpa
 @Configuration
 public class SpringSecurityWebAppConfig extends WebSecurityConfigurerAdapter {
 
-    public static final String APP_HREF = "STORMPATH_APP_HREF";
-    public static final String API_KEY_ID = "STORMPATH_API_KEY_ID";
-    public static final String API_KEY_SECRET = "STORMPATH_API_KEY_SECRET";
+    private static final String APP_HREF = "STORMPATH_APP_HREF";
+    private static final String API_KEY_ID = "STORMPATH_API_KEY_ID";
+    private static final String API_KEY_SECRET = "STORMPATH_API_KEY_SECRET";
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -19,7 +19,7 @@ public class SpringSecurityWebAppConfig extends WebSecurityConfigurerAdapter {
 
     }
 
-    public static final void initializationStormpath() {
+    public static void initializationStormpath() {
         System.getProperties().put("stormpath.application.href", System.getenv().get(APP_HREF));
         System.getProperties().put("stormpath.client.apiKey.id", System.getenv().get(API_KEY_ID));
         System.getProperties().put("stormpath.client.apiKey.secret", System.getenv().get(API_KEY_SECRET));

@@ -22,6 +22,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -39,6 +41,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ContextConfiguration(classes = {SaTaHaNServerStart.class})
 @DirtiesContext
 @ActiveProfiles("test")
+@TestPropertySource(locations="classpath:application-test.properties")
 public class LogMessageAPITest {
 
     private static final String MOCK_DIRECT_PUBLISH = "mock:" + RouteConfig.DIRECT_PUBLISH;
@@ -46,11 +49,11 @@ public class LogMessageAPITest {
     private static String ACCESS_TOKEN;
 
     @Autowired
-    ModelCamelContext modelCamelContext;
+    private ModelCamelContext modelCamelContext;
     @EndpointInject(uri = MOCK_DIRECT_PUBLISH)
-    MockEndpoint mockPublishRoute;
+    private MockEndpoint mockPublishRoute;
     @EndpointInject(uri = MOCK_DIRECT_STATUS)
-    MockEndpoint mockStatusRoute;
+    private MockEndpoint mockStatusRoute;
     @Autowired
     private MockMvc mockMvc;
 
@@ -94,7 +97,7 @@ public class LogMessageAPITest {
     @Test
     public void publishLogMessageTest() throws Exception {
         Waki waki = new Waki();
-        LogMessage logMessage = new LogMessage(1l, "Log test");
+        LogMessage logMessage = new LogMessage(1L, "Log test");
         waki.setLogMessage(logMessage);
 
         Gson json = new Gson();
