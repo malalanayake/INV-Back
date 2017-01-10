@@ -1,5 +1,6 @@
 package com.sthn.service.impl;
 
+import com.sthn.common.CustomerException;
 import com.sthn.model.entity.Customer;
 import com.sthn.repository.ICustomerRepo;
 import com.sthn.service.GenericCRUDService;
@@ -13,11 +14,11 @@ public class CustomerServiceImpl implements GenericCRUDService<Customer> {
     ICustomerRepo iCustomerRepo;
 
     @Override
-    public Customer create(Customer object) throws Exception {
+    public Customer create(Customer object) throws CustomerException {
         if (object.getId() == 0)
             return iCustomerRepo.save(object);
         else
-            throw new Exception("Given customer has Id assigned");
+            throw new CustomerException("Given customer has Id assigned");
     }
 
     @Override

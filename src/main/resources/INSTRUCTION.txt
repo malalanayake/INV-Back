@@ -3,15 +3,25 @@ DEV Environment setup
         - DATASOURCE_URL : jdbc:hsqldb:file:C:/Git-Repo/INV-Back/satahan
         - DATABASE_USERNAME : sa
         - DATABASE_PASSWORD :
+        - STORMPATH_API_KEY_ID : Create the CLIENT_API on the Application
+        - STORMPATH_API_KEY_SECRET : Create the CLIENT_SECRET on the Application
+        - STORMPATH_APP_HREF : Set the Application HREF (https://api.stormpath.com/v1/applications/UUID)
+        - STORMPATH_ACCESS_TOKEN : This is mainly for the integration and unit testing
+            Place the access token from following commands
+            curl -X POST   -H "Origin: http://localhost:8080"   -H "Content-Type: application/x-www-form-urlencoded"   -d "grant_type=password&username={USER_NAME}&password={PASS_WORD}" http://localhost:8080/oauth/token
 
-    - Add following environment variables to override the system environment variables to run on IDE
-        - DATASOURCE_URL : dbc:mysql://localhost:3306/test
+
+    - Add following environment variables to override the system environment variables to run SaTaHaNServer on IDE
+        - DATASOURCE_URL : jdbc:mysql://localhost:3306/test
         - DATABASE_USERNAME : root
         - DATABASE_PASSWORD : root123
 
 
 PROD Environment setup
     - Add following environment variables to production system.
-        - DATASOURCE_URL : dbc:mysql://${HOST_NAME}:3306/${DATABASE_NAME}
+        - DATASOURCE_URL : jdbc:mysql://${HOST_NAME}:3306/${DATABASE_NAME}
         - DATABASE_USERNAME : ${DATABASE_USERNAME}
         - DATABASE_PASSWORD : ${DATABASE_PASSWORD}
+        - STORMPATH_API_KEY_ID : Create the CLIENT_API in Stormpath PROD Application
+        - STORMPATH_API_KEY_SECRET : Create the CLIENT_SECRET in Stormpath PROD Application
+        - STORMPATH_APP_HREF : Set the Application HREF (https://api.stormpath.com/v1/applications/UUID)

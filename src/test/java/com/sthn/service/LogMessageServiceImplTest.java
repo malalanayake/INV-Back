@@ -1,6 +1,7 @@
 package com.sthn.service;
 
 
+import com.sthn.config.InitTestProcess;
 import com.sthn.config.RouteConfig;
 import com.sthn.service.impl.LogMessageServiceImpl;
 import org.apache.camel.EndpointInject;
@@ -19,7 +20,7 @@ import javax.annotation.PostConstruct;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @DirtiesContext
-public class LogMessageServiceImplTest {
+public class LogMessageServiceImplTest extends InitTestProcess {
 
     private static final String MOCK_DIRECT_PUBLISH = "mock:" + RouteConfig.DIRECT_PUBLISH;
     private static final String MOCK_DIRECT_STATUS = "mock:" + RouteConfig.DIRECT_STATUS;

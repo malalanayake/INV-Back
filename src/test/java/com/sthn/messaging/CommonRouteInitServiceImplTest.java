@@ -1,6 +1,7 @@
 package com.sthn.messaging;
 
 
+import com.sthn.config.InitTestProcess;
 import com.sthn.config.RouteConfig;
 import com.sthn.config.SpringSecurityWebAppConfig;
 import com.sthn.messaging.impl.CommonRouteInitServiceImpl;
@@ -23,7 +24,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @DirtiesContext
-public class CommonRouteInitServiceImplTest {
+public class CommonRouteInitServiceImplTest extends InitTestProcess{
 
     private static final String MOCK_DIRECT_PUBLISH = "mock:" + RouteConfig.DIRECT_PUBLISH;
 

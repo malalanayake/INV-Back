@@ -1,5 +1,6 @@
 package com.sthn.controller;
 
+import com.sthn.common.CustomerException;
 import com.sthn.config.RESTAPIConfig;
 import com.sthn.model.LogMessage;
 import com.sthn.model.Waki;
@@ -27,7 +28,7 @@ public class CustomerAPI {
         return customer;
     }
 
-    @ExceptionHandler(value = {Exception.class})
+    @ExceptionHandler(value = {CustomerException.class, Exception.class})
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Customer get(@PathVariable("id") long id) throws Exception {
         Customer customer = customerGenericCRUDService.get(id);

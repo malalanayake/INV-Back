@@ -2,7 +2,7 @@ package com.sthn.controller;
 
 import com.google.gson.Gson;
 import com.sthn.SaTaHaNServerStart;
-import com.sthn.config.AppConfigTestContext;
+import com.sthn.config.InitTestProcess;
 import com.sthn.config.RESTAPIConfig;
 import com.sthn.config.RouteConfig;
 import com.sthn.config.SpringSecurityWebAppConfig;
@@ -23,7 +23,6 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -38,15 +37,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-@ContextConfiguration(classes = {SaTaHaNServerStart.class})
 @DirtiesContext
-@ActiveProfiles("test")
-@TestPropertySource(locations="classpath:application-test.properties")
-public class LogMessageAPITest {
+public class LogMessageAPITest extends InitTestProcess{
 
     private static final String MOCK_DIRECT_PUBLISH = "mock:" + RouteConfig.DIRECT_PUBLISH;
     private static final String MOCK_DIRECT_STATUS = "mock:" + RouteConfig.DIRECT_STATUS;
-    private static String ACCESS_TOKEN;
 
     @Autowired
     private ModelCamelContext modelCamelContext;
@@ -56,11 +51,6 @@ public class LogMessageAPITest {
     private MockEndpoint mockStatusRoute;
     @Autowired
     private MockMvc mockMvc;
-
-    public LogMessageAPITest() {
-        SpringSecurityWebAppConfig.initializationStormpath();
-        ACCESS_TOKEN = System.getenv().get("STORMPATH_ACCESS_TOKEN");
-    }
 
     @PostConstruct
     public void init() throws Exception {
