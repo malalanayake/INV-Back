@@ -1,10 +1,10 @@
-package com.sthn.messaging;
-
+package com.sthn.service;
 
 import com.sthn.config.InitTestProcess;
 import com.sthn.config.RouteConfig;
 import com.sthn.config.SpringSecurityWebAppConfig;
-import com.sthn.messaging.impl.CommonRouteInitServiceImpl;
+import com.sthn.messaging.impl.RouteInitServiceImpl;
+import com.sthn.model.PaymentMessage;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
@@ -20,44 +20,51 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.annotation.PostConstruct;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @DirtiesContext
-public class CommonRouteInitServiceImplTest extends InitTestProcess{
+public class PaymentServiceTest extends InitTestProcess {
 
-    private static final String MOCK_DIRECT_PUBLISH = "mock:" + RouteConfig.DIRECT_PUBLISH;
+    private static final String MOCK_DIRECT_M_PAYMENT_TOPIC = "mock:" + RouteConfig.DIRECT_M_PAYMENT_TOPIC;
 
     @Autowired
-    CommonRouteInitServiceImpl commonRouteInitService;
+    IPaymentService paymentService;
     @Autowired
     ModelCamelContext modelCamelContext;
 
-    @EndpointInject(uri = MOCK_DIRECT_PUBLISH)
+    @EndpointInject(uri = MOCK_DIRECT_M_PAYMENT_TOPIC)
     MockEndpoint mockPublishRoute;
 
-    public CommonRouteInitServiceImplTest(){
+    public PaymentServiceTest() {
         SpringSecurityWebAppConfig.initializationStormpath();
     }
 
     @PostConstruct
     public void init() throws Exception {
-        modelCamelContext.getRouteDefinition(RouteConfig.ROUTE_NAME_PUBLISH).adviceWith(modelCamelContext, new RouteBuilder() {
+        modelCamelContext.getRouteDefinition(RouteConfig.ROUTE_NAME_PAYMENT).adviceWith(modelCamelContext, new RouteBuilder() {
             @Override
             public void configure() throws Exception {
-                interceptSendToEndpoint(RouteConfig.DIRECT_PUBLISH).skipSendToOriginalEndpoint().to(MOCK_DIRECT_PUBLISH);
+                interceptSendToEndpoint(RouteConfig.DIRECT_M_PAYMENT_TOPIC).skipSendToOriginalEndpoint().to(MOCK_DIRECT_M_PAYMENT_TOPIC);
             }
         });
 
     }
 
     @Test
-    public void exchangeShouldContainTheGivenMessageAndEnterToTheGivenRoute() throws InterruptedException {
-        Exchange exAfter = commonRouteInitService.enter(RouteConfig.DIRECT_PUBLISH, "Sample Log Data");
-        assertEquals(exAfter.getIn().getBody().toString(), "Sample Log Data");
+    public void paymentMessageShouldEnterToThePaymentRoute() throws InterruptedException {
+        PaymentMessage paymentMessage = new PaymentMessage();
+        paymentMessage.setId(200);
+        paymentMessage.setAccountNo("9876589");
+        paymentMessage.setRoutingNo("2564789");
+        paymentMessage.setAmount("10000");
+        paymentMessage.setMessage("Supplier invoice payment");
+
+        paymentMessage = paymentService.pay(paymentMessage);
+        assertNotEquals(null, paymentMessage.getExchangeId());
 
         mockPublishRoute.setExpectedMessageCount(1);
         mockPublishRoute.assertIsSatisfied();
     }
-
 }

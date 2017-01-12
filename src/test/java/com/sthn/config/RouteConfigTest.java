@@ -10,7 +10,9 @@ public class RouteConfigTest {
     public void camelRoutesShouldBe() {
         assertEquals(RouteConfig.DIRECT_PUBLISH, "direct:publish");
         assertEquals(RouteConfig.DIRECT_STATUS, "direct:status");
+        assertEquals(RouteConfig.DIRECT_PAYMENT, "direct:payment");
         assertEquals(RouteConfig.ROUTE_NAME_PUBLISH, "publish-route");
         assertEquals(RouteConfig.ROUTE_NAME_STATUS, "status-route");
+        assertEquals(RouteConfig.ROUTE_NAME_PAYMENT, "payment-route");
     }
 }

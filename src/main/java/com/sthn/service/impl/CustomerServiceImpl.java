@@ -1,6 +1,6 @@
 package com.sthn.service.impl;
 
-import com.sthn.common.CustomerException;
+import com.sthn.common.exception.CustomerException;
 import com.sthn.model.entity.Customer;
 import com.sthn.repository.ICustomerRepo;
 import com.sthn.service.GenericCRUDService;

@@ -1,4 +1,4 @@
-package com.sthn.messaging.routehelper;
+package com.sthn.messaging.extractor;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;

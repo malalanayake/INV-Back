@@ -1,4 +1,4 @@
-package com.sthn.common;
+package com.sthn.common.exception;
 
 
 public class CustomerException extends Exception {

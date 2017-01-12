@@ -1,17 +1,13 @@
 package com.sthn.controller;
 
-import com.sthn.common.CustomerException;
+import com.sthn.common.exception.CustomerException;
 import com.sthn.config.RESTAPIConfig;
-import com.sthn.model.LogMessage;
-import com.sthn.model.Waki;
 import com.sthn.model.entity.Customer;
 import com.sthn.service.GenericCRUDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
-import javax.websocket.server.PathParam;
 
 @RestController
 @RequestMapping(RESTAPIConfig.CUSTOMER_API)

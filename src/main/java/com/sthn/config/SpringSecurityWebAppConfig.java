@@ -15,7 +15,10 @@ public class SpringSecurityWebAppConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.apply(stormpath());
+        http.apply(stormpath()).and()
+                .authorizeRequests()
+                //Gave the open access to payment api No Auth required.
+                .antMatchers("/" + RESTAPIConfig.PAYMENT_API + "/*").permitAll();
 
     }
 

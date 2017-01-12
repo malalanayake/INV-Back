@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Configuration;
 public class RESTAPIConfig {
     public static final String LOG_MESSAGE_API = "log-api";
     public static final String CUSTOMER_API = "customer-api";
+    public static final String PAYMENT_API = "payment-api";
+
     public static final String PUBLISH_API_MESSAGE_HANDLER = "publishAPIMessageHandler";
 
     @Autowired
