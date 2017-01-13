@@ -6,6 +6,7 @@ import com.sthn.messaging.IRouteInitService;
 import com.sthn.model.PaymentMessage;
 import com.sthn.service.IPaymentService;
 import org.apache.camel.Exchange;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,8 @@ public class PaymentServiceImpl implements IPaymentService {
 
     @Override
     public PaymentMessage pay(PaymentMessage paymentMessage) {
-
+        DateTime dateTime = new DateTime();
+        paymentMessage.setDateTime(dateTime.toString());
         Exchange message = iRouteInitService.enter(RouteConfig.DIRECT_PAYMENT, paymentMessage);
         paymentMessage.setExchangeId(message.getExchangeId());
         return paymentMessage;

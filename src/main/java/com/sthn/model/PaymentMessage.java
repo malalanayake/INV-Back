@@ -9,6 +9,7 @@ public class PaymentMessage {
     private String routingNo;
     private String amount;
     private String exchangeId;
+    private String dateTime;
 
     public int getId() {
         return id;
@@ -56,5 +57,13 @@ public class PaymentMessage {
 
     public void setExchangeId(String exchangeId) {
         this.exchangeId = exchangeId;
+    }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 }

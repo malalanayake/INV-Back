@@ -11,6 +11,7 @@ import org.apache.camel.EndpointInject;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.model.ModelCamelContext;
+import org.joda.time.DateTime;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,12 +64,15 @@ public class PaymentAPITest extends InitTestProcess {
 
     @Test
     public void paymentShouldWorkWithCorrectData() throws Exception {
+        DateTime dateTime = new DateTime();
+
         PaymentMessage paymentMessage = new PaymentMessage();
         paymentMessage.setId(200);
         paymentMessage.setAccountNo("9876589");
         paymentMessage.setRoutingNo("2564789");
         paymentMessage.setAmount("10000");
         paymentMessage.setMessage("Supplier invoice payment");
+        paymentMessage.setDateTime(dateTime.toString());
 
         Gson json = new Gson();
         String message = json.toJson(paymentMessage);
@@ -81,22 +85,6 @@ public class PaymentAPITest extends InitTestProcess {
                 .andExpect(jsonPath("$.routingNo").value("2564789"))
                 .andExpect(jsonPath("$.amount").value("10000"))
                 .andExpect(jsonPath("$.message").value("Supplier invoice payment"));
-    }
-
-
-    @Test(expected = NestedServletException.class)
-    public void createCustomerShouldThrowExceptionWhenPassTheCustomerID() throws Exception {
-        Customer customer = new Customer();
-        customer.setId(1l);
-
-        Gson json = new Gson();
-        String message = json.toJson(customer);
-        System.out.println("TEST DATA : [" + message + "]");
-        this.mockMvc.perform(post("/" + RESTAPIConfig.CUSTOMER_API + "/create")
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + ACCESS_TOKEN)
-                .content(message).contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-        );
-
     }
 
 }
