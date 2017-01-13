@@ -20,7 +20,7 @@ public class PaymentMessageTest {
 
         Gson json = new Gson();
         String message = json.toJson(paymentMessage);
-        //System.out.println(message);
+        System.out.println(message);
         Assert.assertEquals("{\"id\":1,\"message\":\"Payment for the suppliers\",\"accountNo\":\"123456789\",\"routingNo\":\"987654321\",\"amount\":\"2000\",\"exchangeId\":\"ABC-TEST-MESSAGE-0101\"}", message);
     }
 }

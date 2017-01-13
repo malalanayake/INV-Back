@@ -36,10 +36,6 @@ public class RouteInitServiceImplTest extends InitTestProcess {
     @EndpointInject(uri = MOCK_DIRECT_PUBLISH)
     MockEndpoint mockPublishRoute;
 
-    public RouteInitServiceImplTest() {
-        SpringSecurityWebAppConfig.initializationStormpath();
-    }
-
     @PostConstruct
     public void init() throws Exception {
         modelCamelContext.getRouteDefinition(RouteConfig.ROUTE_NAME_PUBLISH).adviceWith(modelCamelContext, new RouteBuilder() {

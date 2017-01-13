@@ -1,5 +1,6 @@
 package com.sthn.messaging;
 
+import com.google.gson.Gson;
 import com.sthn.config.InitTestProcess;
 import com.sthn.config.RouteConfig;
 import com.sthn.config.SpringSecurityWebAppConfig;
@@ -20,6 +21,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.annotation.PostConstruct;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -35,10 +37,6 @@ public class PaymentRouteTest extends InitTestProcess {
 
     @EndpointInject(uri = MOCK_DIRECT_M_PAYMENT_TOPIC)
     MockEndpoint mockPublishRoute;
-
-    public PaymentRouteTest() {
-        SpringSecurityWebAppConfig.initializationStormpath();
-    }
 
     @PostConstruct
     public void init() throws Exception {
@@ -60,10 +58,20 @@ public class PaymentRouteTest extends InitTestProcess {
         paymentMessage.setAmount("10000");
         paymentMessage.setMessage("Supplier invoice payment");
 
+
         Exchange exAfter = routeInitService.enter(RouteConfig.DIRECT_PAYMENT, paymentMessage);
-        PaymentMessage afterPaymentMessage = (PaymentMessage) exAfter.getIn().getBody();
-        assertEquals(paymentMessage, afterPaymentMessage);
-       // assertEquals("", afterPaymentMessage.getExchangeId());
+
+        String afterMessage = exAfter.getIn().getBody().toString();
+        System.out.println("[" + afterMessage + "]");
+
+        Gson json = new Gson();
+        PaymentMessage afterPayment = json.fromJson(afterMessage, PaymentMessage.class);
+
+        assertEquals(paymentMessage.getId(), afterPayment.getId());
+        assertEquals(paymentMessage.getAccountNo(), afterPayment.getAccountNo());
+        assertEquals(paymentMessage.getRoutingNo(), afterPayment.getRoutingNo());
+        assertEquals(paymentMessage.getAmount(), afterPayment.getAmount());
+        assertEquals(paymentMessage.getMessage(), afterPayment.getMessage());
 
         mockPublishRoute.setExpectedMessageCount(1);
         mockPublishRoute.assertIsSatisfied();

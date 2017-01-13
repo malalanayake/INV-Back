@@ -25,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @DirtiesContext
-public class CustomerAPITestTestProcess extends InitTestProcess {
+public class CustomerAPITest extends InitTestProcess {
 
     @Autowired
     private MockMvc mockMvc;

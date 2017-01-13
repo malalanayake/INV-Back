@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="259.0" prefWidth="471.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.ui.controller.SatahanUI">
+   <children>
+      <GridPane layoutY="6.0" prefHeight="259.0" prefWidth="491.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="239.0" minWidth="10.0" prefWidth="52.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="443.0" minWidth="10.0" prefWidth="439.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="83.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="174.0" minHeight="0.0" prefHeight="40.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="187.0" minHeight="8.0" prefHeight="34.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="187.0" minHeight="10.0" prefHeight="151.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ComboBox fx:id="dropDownFrom" prefHeight="27.0" prefWidth="187.0" promptText="--Select Server--" GridPane.columnIndex="1" />
+            <Label text="FROM " />
+            <Button id="btnConsume" mnemonicParsing="false" onAction="#btnConsumeOnAction" text="Consume" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ComboBox fx:id="dropDownTO" prefHeight="27.0" prefWidth="186.0" promptText="--Select Server--" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="TO " GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+   </children>
+</Pane>

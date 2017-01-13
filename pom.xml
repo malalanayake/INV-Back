@@ -113,6 +113,10 @@
         <logback.version>1.1.7</logback.version>
         <slf4j.version>1.7.21</slf4j.version>
         <stormpath.version>1.2.1</stormpath.version>
+
+        <!-- The main class to start by executing java -jar -->
+        <start-class>com.sthn.SaTaHaNServerStart</start-class>
+
     </properties>
 
 
@@ -120,6 +124,29 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
+            </resource>
+            <!-- copy fxml and css resources -->
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.fxml</include>
+                    <include>**/*.css</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/test/java</directory>
+                <includes>
+                    <include>**/*.fxml</include>
+                    <include>**/*.css</include>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
             </resource>
         </resources>
         <plugins>

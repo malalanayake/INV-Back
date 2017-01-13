@@ -1,6 +1,6 @@
 package com.sthn.messaging.validator;
 
-public interface IValidator<T> {
+public interface IValidator<T, V> {
 
-    public T validate(T t);
+    public V validate(T t);
 }

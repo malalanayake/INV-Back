@@ -25,7 +25,7 @@ import static org.junit.Assert.assertNotEquals;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @DirtiesContext
-public class PaymentServiceTest extends InitTestProcess {
+public class PaymentServiceImplTest extends InitTestProcess {
 
     private static final String MOCK_DIRECT_M_PAYMENT_TOPIC = "mock:" + RouteConfig.DIRECT_M_PAYMENT_TOPIC;
 
@@ -37,9 +37,6 @@ public class PaymentServiceTest extends InitTestProcess {
     @EndpointInject(uri = MOCK_DIRECT_M_PAYMENT_TOPIC)
     MockEndpoint mockPublishRoute;
 
-    public PaymentServiceTest() {
-        SpringSecurityWebAppConfig.initializationStormpath();
-    }
 
     @PostConstruct
     public void init() throws Exception {
