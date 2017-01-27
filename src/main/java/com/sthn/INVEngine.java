@@ -11,11 +11,11 @@ import java.util.Arrays;
 
 @SpringBootApplication
 @ComponentScan
-public class SaTaHaNServerStart {
+public class INVEngine {
 
     public static void main(String[] args) {
         SpringSecurityWebAppConfig.initializationStormpath();
-        ApplicationContext ctx = SpringApplication.run(SaTaHaNServerStart.class, args);
+        ApplicationContext ctx = SpringApplication.run(INVEngine.class, args);
 
         String[] beanNames = ctx.getBeanDefinitionNames();
         Arrays.sort(beanNames);

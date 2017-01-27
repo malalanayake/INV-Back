@@ -115,7 +115,7 @@
         <stormpath.version>1.2.1</stormpath.version>
 
         <!-- The main class to start by executing java -jar -->
-        <start-class>com.sthn.SaTaHaNServerStart</start-class>
+        <start-class>com.sthn.INVEngine</start-class>
 
     </properties>
 

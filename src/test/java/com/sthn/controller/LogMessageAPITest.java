@@ -1,11 +1,9 @@
 package com.sthn.controller;
 
 import com.google.gson.Gson;
-import com.sthn.SaTaHaNServerStart;
 import com.sthn.config.InitTestProcess;
 import com.sthn.config.RESTAPIConfig;
 import com.sthn.config.RouteConfig;
-import com.sthn.config.SpringSecurityWebAppConfig;
 import com.sthn.model.LogMessage;
 import com.sthn.model.Waki;
 import org.apache.camel.EndpointInject;
@@ -20,9 +18,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
